@@ -1,0 +1,15 @@
+@mixin link($color, $hov: darken($color, 15%)){
+	color: $color;
+	border-bottom: 1px solid $color;
+	transition: 0.3s;
+	text-decoration: none;
+	display: inline-block;
+	&:hover,
+	&:focus {
+		border-bottom: 1px solid transparent;
+		color: $hov;
+	}
+	&:focus {
+		outline: none;
+	}
+}

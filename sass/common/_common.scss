@@ -1,0 +1,158 @@
+// Box-sizing
+* {
+	box-sizing: border-box;
+}
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+.content {
+	overflow: hidden;
+}
+.body {
+	max-width: 1920px;
+}
+
+body {
+	font-size: #{$base-font-size}px;
+	line-height: #{$base-line-height}px;
+	color: $default-color;
+}
+p {
+	@include font;
+	&:first-of-type {
+		//margin: 0;
+	}
+}
+
+.block {
+	padding: 45px 0;
+	@include breakpoint(mobile) {
+		padding: 15px 0;
+	}
+}
+.wide-block {
+	max-width: 1366px;
+	margin: 0 auto;
+}
+
+//Nav
+
+nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+// Reset fonts for relevant elements
+
+input,
+button,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+
+// Links
+
+a {
+	color: $link;
+	transition: 0.2s;
+	text-decoration: underline;
+	display: inline-block;
+	&:hover,
+	&:focus {
+		color: $link-hov;
+		text-decoration: none;
+	}
+	&:focus {
+		outline: none;
+	}
+	&[href^="mailto"]{
+		//@include link(#004b62);
+	}
+}
+
+// Images
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+//Buttons
+
+body button:not(.scrollup):not(.slider-arrow):not(.c-hamburger) {
+	background: #74a109;
+	background: linear-gradient(to bottom, #a7c90f 0%, #99bd0d 4%, #74a109 50%, #558a07 100%);
+	color: #fff;
+	@include font(22,22,700);
+	text-transform: uppercase;
+	padding: 13px 55px;
+	border-radius: 4px;
+	border: 1px solid #7ca60a;
+	&:hover {
+		border: 1px solid #577407;
+		background: linear-gradient(to top, #a7c90f 0%, #99bd0d 4%, #74a109 50%, #558a07 100%);
+	}
+}
+
+// Headers
+
+body h1, .h1 {
+	@include font(50, 54, 700);
+	color: $header;
+	margin: 18px 0;
+	text-align: center;
+	@include breakpoint(mobile){
+		@include font(36, 38, 700);
+	}
+}
+body h2, .h2 {
+	@include font(30, 32, 700);
+	color: $header;
+	margin: 15px 0;
+}
+body h3, .h3 {
+	@include font(20, 24, 700);
+	color: $header;
+	margin: 10px 0;
+}
+body h4, .h4, body h5, .h5 {
+	color: $header;
+}
+
+.inner {
+	h1, .h1, h2, .h2, h3, .h3 {
+		text-align: left;
+	}
+}
+
+.sub-h {
+	@include font(15, 28);
+	color: $grey;
+	text-align: center;
+}
+
+.inner ul {
+	margin: 7px 0;
+	padding: 0;
+	list-style: none;
+	li {
+		font-size: 1.1em;
+		padding: 5px 0;
+		&::before{
+			content: "";
+			display: inline-block;
+			width: 0;
+			height: 0;
+			border-top: 6px solid transparent;
+			border-left: 12px solid $link;
+			border-bottom: 6px solid transparent;
+			margin-right: 10px;
+		}
+	}
+}

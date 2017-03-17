@@ -1,0 +1,11 @@
+@mixin font($size: $base-font-size, $height: $base-line-height, $weight: 400, $context: $base-font-size, $font: $default-font){
+
+	font-weight: $weight;
+
+	$this: $size/$context;
+
+	font-size: $this + em;
+	line-height: $height/$size + em;
+	font-family: $font;
+
+}

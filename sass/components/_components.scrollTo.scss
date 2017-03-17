@@ -1,0 +1,43 @@
+.scrollup {
+	position: fixed;
+	text-indent: -9999px;
+	z-index: 10;
+	right: -9999px;
+	bottom: 60px;
+	width: 36px;
+	height: 36px;
+	border: 2px solid $scroll-up-color;
+	border-radius: 50%;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	outline: none;
+	&::before {
+		content: '\23F6';
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -10px;
+		margin-top: -14px;
+		width: 16px;
+		height: 22px;
+		color: $scroll-up-color;
+		font-size: 22px;
+		text-indent: 0;
+	}
+	&.act {
+		right: 20px;
+		opacity: .7;
+		background: #fff;
+		&:hover {
+			background: $scroll-up-color;
+			opacity: 1;
+		}
+	}
+	&:hover {
+		&::before {
+			color: #fff;
+		}
+	}
+}

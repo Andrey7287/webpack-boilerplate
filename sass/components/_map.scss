@@ -1,0 +1,11 @@
+#map {
+	height: 470px;
+	@include breakpoint (mobile){
+		height: 350px;
+	}
+}
+
+.map-wrapper {
+	position: relative;
+}
+

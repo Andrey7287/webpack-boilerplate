@@ -1,0 +1,16 @@
+@mixin layout($layout) {
+	@if $layout == table {
+		display: table;
+		width: 100%;
+		&__item {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+	@if $layout == block {
+		display: block;
+		&__item {
+			display: block;
+		}
+	}
+}

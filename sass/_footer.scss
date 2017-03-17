@@ -1,0 +1,22 @@
+.footer {
+	background: $bkg-footer;
+	padding: 25px 0;
+	.soc {
+		line-height: 30px;
+		@include breakpoint (mobile) {
+			margin: 10px 0 20px;
+		}
+		&__item {
+			font-size: 0;
+			line-height: 0;
+			vertical-align: middle;
+			position: relative;
+			&::before {
+				content: ".";
+				width: 42px;
+				height: 36px;
+				display: inline-block;
+			}
+		}
+	}
+}
