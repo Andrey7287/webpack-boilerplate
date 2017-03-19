@@ -85,21 +85,6 @@ img {
 
 //Buttons
 
-body button:not(.scrollup):not(.slider-arrow):not(.c-hamburger) {
-	background: #74a109;
-	background: linear-gradient(to bottom, #a7c90f 0%, #99bd0d 4%, #74a109 50%, #558a07 100%);
-	color: #fff;
-	@include font(22,22,700);
-	text-transform: uppercase;
-	padding: 13px 55px;
-	border-radius: 4px;
-	border: 1px solid #7ca60a;
-	&:hover {
-		border: 1px solid #577407;
-		background: linear-gradient(to top, #a7c90f 0%, #99bd0d 4%, #74a109 50%, #558a07 100%);
-	}
-}
-
 // Headers
 
 body h1, .h1 {
@@ -137,6 +122,8 @@ body h4, .h4, body h5, .h5 {
 	text-align: center;
 }
 
+//Lists
+
 .inner ul {
 	margin: 7px 0;
 	padding: 0;
@@ -153,6 +140,56 @@ body h4, .h4, body h5, .h5 {
 			border-left: 12px solid $link;
 			border-bottom: 6px solid transparent;
 			margin-right: 10px;
+		}
+	}
+}
+
+//Tables
+
+table {
+	th {
+		background: #ededed;
+	}
+	td, th {
+		padding: 10px;
+		vertical-align: top;
+		border: 1px solid #ccc;
+	}
+	@include breakpoint (mobile) {
+		display: block;
+		thead, tbody, th, td, tr {
+			display: block;
+		}
+		thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		tr { border: 1px solid #ccc; }
+		td {
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee;
+			position: relative;
+			padding-left: 50%;
+			&::before {
+				/* Now like a table header */
+				position: absolute;
+				/* Top/left values mimic padding */
+				top: 11px;
+				left: 6px;
+				width: 45%;
+				padding-right: 10px;
+				white-space: nowrap;
+				content: attr(data-head);
+			}
+		}
+	}
+	&.full {
+		@include breakpoint (mobile){
+			td {
+				padding-left: 10px;
+			}
 		}
 	}
 }

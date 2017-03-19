@@ -20,20 +20,14 @@
 							<button class="c-hamburger c-hamburger--htx">
 								<span>toggle menu</span>
 							</button>
-							<!-- Site menu data -->
-							<%
-							var menuItems = ['О&nbsp;нас','Каталог','Статьи','Отзывы','Контакты']
-							%>
-							<!-- Site menu template -->
-							<ul class="site-nav">
-							<%menuItems.forEach((item, idx)=>{%>
-
-								<li class="site-nav__item<% if(!idx){ %> site-nav__item--act<%}%>">
-									<a href=""><%=item %></a>
-								</li>
-							<%});%>
+							<ul class="site-nav mobile-close hide">
+								<li class="site-nav__item site-nav__item--act"><a href="/" class="site-nav__link"><span>Главная</span></a></li>
+								<li class="site-nav__item"><a href="#" class="site-nav__link"><span>О&nbsp;нас</span></a></li>
+								<li class="site-nav__item"><a href="#" class="site-nav__link"><span>Каталог</span></a></li>
+								<li class="site-nav__item"><a href="#" class="site-nav__link"><span>Статьи</span></a></li>
+								<li class="site-nav__item"><a href="#" class="site-nav__link"><span>Отзывы</span></a></li>
+								<li class="site-nav__item"><a href="#" class="site-nav__link"><span>Контакты</span></a></li>
 							</ul>
-							.
 						</nav>
 
 					</div>
@@ -41,20 +35,16 @@
 
 			</header>
 			<!-- HEADER end-->
-
-			<div class="slider-wrapp">
-				<div class="slider">
-					<div class="slider__item">
-						<img src="images/slider1.jpg" alt="">
-					</div>
-					<div class="slider__item">
-						<img src="images/slider2.jpg" alt="">
-					</div>
+			<!--  breadcrumbs -->
+			<div class="container">
+				<div class="breadcrumbs">
+					<a class="breadcrumbs__item" href="#">Главная</a>
+					<a class="breadcrumbs__item" href="#">Каталог</a>
+					<span class="breadcrumbs__item">Товар каталога</span>
 				</div>
-				<button class="slider-arrow left">previos</button>
-				<button class="slider-arrow right">next</button>
-				<div class="slider-dots"></div>
 			</div>
+
+
 
 		</div>
 		<footer class="footer">

@@ -42,34 +42,34 @@ $(window).on('load', function(){
 
 /**********************
 ********* MAP *********
-**********************
+***********************/
 
 if ( isMap ) {
 
 	require.ensure([], (require) => {
 		require('./modules/map');
-	});
+	}, 'map');
 
-}*/
+}
 
 /***********************
 ******** SLIDER ********
-***********************
+************************/
 
 
 if ( isSlider ) {
 
 	require.ensure([], (require) => {
-		require('script!slick-carousel/slick/slick.js');
+		require('script-loader!slick-carousel/slick/slick.js');
 		$('.slider').slick({
-			prevArrow: $('.left'),
-			nextArrow: $('.right'),
+			prevArrow: $('.slider-arrow.left'),
+			nextArrow: $('.slider-arrow.right'),
 			dots: true,
 			appendDots: $('.slider-dots')
 		});
-	});
+	}, 'slick');
 
-}*/
+}
 
 /************************
 ******* Scroll Up *******

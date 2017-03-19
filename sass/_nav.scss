@@ -1,0 +1,9 @@
+nav {
+	position: relative;
+}
+.site-nav {
+	@include layout(table);
+	@include breakpoint(mobile){
+		@include layout(block);
+	}
+}

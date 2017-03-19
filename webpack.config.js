@@ -1,15 +1,17 @@
-const webpack = require('webpack');
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack'),
+			path = require('path'),
+			ExtractTextPlugin = require('extract-text-webpack-plugin'),
+			HtmlWebpackPlugin = require('html-webpack-plugin'),
+			SpritesmithPlugin = require('webpack-spritesmith');
+			nodeEnv = process.env.NODE_ENV || 'development',
+			isProd = nodeEnv === 'production',
+			pages = ['index', 'inner', 'contacts'];
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProd = nodeEnv === 'production';
-
-const sourcePath = path.join(__dirname, './frontend');
-const staticsPath = path.join(__dirname, './static');
-
-const extractCSS = new ExtractTextPlugin({ filename: 'style.css', disable: false, allChunks: true });
+const extractCSS = new ExtractTextPlugin({
+	filename: '../style.css',
+	disable: false,
+	allChunks: true
+});
 
 const plugins = [
 	new webpack.optimize.CommonsChunkPlugin({
@@ -20,16 +22,36 @@ const plugins = [
 	new webpack.DefinePlugin({
 		'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
 	}),
-	new HtmlWebpackPlugin({
-		template: sourcePath + '/index.ejs',
-		production: isProd,
-		inject: true,
+	new webpack.ProvidePlugin({
+		$: 'jquery/dist/jquery.min'
 	}),
+	new SpritesmithPlugin({
+		src: {
+			cwd: path.resolve(__dirname, 'images/src'),
+			glob: '*.png'
+		},
+		target: {
+			image: path.resolve(__dirname, 'images/sprite.png'),
+			css: path.resolve(__dirname, 'sass/tools/_sprite.scss')
+		},
+		apiOptions: {
+			cssImageRef: '../images/sprite.png'
+		}
+	})
 ];
 
-const jsEntry = [
-	'main'
-];
+pages.forEach((val)=>{
+
+	plugins.push(
+		new HtmlWebpackPlugin({
+			template: `./frontend/${val}.ejs`,
+			title: `${val}`,
+			inject: true,
+			filename: isProd ? `../${val}.html` : `${val}.html`
+		})
+	);
+
+});
 
 if (isProd) {
 	plugins.push(
@@ -56,11 +78,6 @@ if (isProd) {
 		}),
 		extractCSS
 	);
-
-	jsEntry.unshift(
-		'webpack-dev-server/client?http://localhost:3000',
-		'webpack/hot/only-dev-server'
-	);
 } else {
 	plugins.push(
 		new webpack.HotModuleReplacementPlugin(),
@@ -70,16 +87,16 @@ if (isProd) {
 
 module.exports = {
 	devtool: isProd ? 'source-map' : 'cheap-module-source-map',
-	context: sourcePath,
 	entry: {
-		js: jsEntry
+		js: ['./frontend/main']
 	},
 	output: {
-		path: staticsPath,
+		path: isProd ? './js' : path.resolve(__dirname, '/js'),
 		filename: 'bundle.js',
-		publicPath: '/',
+		publicPath: isProd ? './js/' : ''
 	},
 	module: {
+		noParse: /jquery/,
 		rules: [
 			{
 				test: /\.html$/,
@@ -113,24 +130,31 @@ module.exports = {
 			},
 			{
 				test: /\.(gif|png|jpg|jpeg\ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-				use: 'file-loader'
+				use: [
+					{
+						loader: 'file-loader',
+						query: {
+							name: isProd ? '../images/[name].[ext]' : './images/[name].[ext]'
+						}
+					}
+				]
 			}
 		],
 	},
 	resolve: {
 		extensions: ['.js'],
 		modules: [
-			sourcePath,
-			'node_modules'
+			'node_modules',
+			'spritesmith-generated'
 		]
 	},
 	plugins: plugins,
 	devServer: {
-		contentBase: './frontend',
-		historyApiFallback: true,
-		port: 3000,
-		hot: true,
-		compress: isProd,
-		stats: { colors: true },
-	}
+		open: true,
+    historyApiFallback: true,
+    port: 3000,
+    hot: true,
+    stats: { colors: true },
+  }
+
 };
