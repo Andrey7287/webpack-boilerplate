@@ -1,8 +1,8 @@
-+++++#  Webpack hot boilerplate
+#  Webpack hot boilerplate
 
 ## Contains
 
-- [x] [Webpack 2.2](https://webpack.github.io)
+- [x] [Webpack 2.2](https://webpack.js.org/)
 - [x] [Babel 6.x](https://babeljs.io/)
 
 ## Features
