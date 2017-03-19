@@ -14,7 +14,7 @@
 - [x] ejs templates 
 - [x] Building sprites
 
-##System Requirements
+## System Requirements
 
 - Node 6.x.x
 - Npm 3.x.x
