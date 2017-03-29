@@ -1,16 +1,17 @@
+
 .scrollup {
 	position: fixed;
 	text-indent: -9999px;
 	z-index: 10;
 	right: -9999px;
-	bottom: 60px;
+	bottom: 35px;
 	width: 36px;
 	height: 36px;
 	border: 2px solid $scroll-up-color;
 	border-radius: 50%;
 	cursor: pointer;
 	opacity: 0;
-	transition: opacity 0.3s ease;
+	transition: all 0.2s ease-out;
 	outline: none;
 	&::before {
 		content: '\23F6';
@@ -19,7 +20,7 @@
 		top: 50%;
 		left: 50%;
 		margin-left: -10px;
-		margin-top: -14px;
+		margin-top: -16px;
 		width: 16px;
 		height: 22px;
 		color: $scroll-up-color;

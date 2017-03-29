@@ -11,6 +11,7 @@
 }
 .body {
 	max-width: 1920px;
+	@include font;
 }
 
 body {
@@ -23,17 +24,6 @@ p {
 	&:first-of-type {
 		//margin: 0;
 	}
-}
-
-.block {
-	padding: 45px 0;
-	@include breakpoint(mobile) {
-		padding: 15px 0;
-	}
-}
-.wide-block {
-	max-width: 1366px;
-	margin: 0 auto;
 }
 
 //Nav
@@ -59,18 +49,7 @@ textarea {
 // Links
 
 a {
-	color: $link;
-	transition: 0.2s;
-	text-decoration: underline;
-	display: inline-block;
-	&:hover,
-	&:focus {
-		color: $link-hov;
-		text-decoration: none;
-	}
-	&:focus {
-		outline: none;
-	}
+	@include link($link, $link-hov)
 	&[href^="mailto"]{
 		//@include link(#004b62);
 	}
@@ -116,11 +95,6 @@ body h4, .h4, body h5, .h5 {
 	}
 }
 
-.sub-h {
-	@include font(15, 28);
-	color: $grey;
-	text-align: center;
-}
 
 //Lists
 

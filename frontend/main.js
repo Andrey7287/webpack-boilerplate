@@ -47,7 +47,7 @@ $(window).on('load', function(){
 if ( isMap ) {
 
 	require.ensure([], (require) => {
-		require('./modules/map');
+		require('./modules/ymap');
 	}, 'map');
 
 }

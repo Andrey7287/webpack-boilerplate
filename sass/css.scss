@@ -1,8 +1,3 @@
-/*Common*/
-@import "common/variables";
-@import "common/mixins";
-@import "common/common";
-
 /*Tools*/
 @import "tools/sprite";
 @import "tools/bootstrap";
@@ -10,6 +5,11 @@
 /*Modules*/
 @import "../node_modules/modularized-normalize-scss/normalize.scss";
 @import "../node_modules/slick-carousel/slick/slick.scss";
+
+/*Common*/
+@import "common/variables";
+@import "common/mixins";
+@import "common/common";
 
 /*Components*/
 @import "components/map";
@@ -24,6 +24,7 @@
 @import "main";
 @import "aside";
 @import "footer";
+@import "forms";
 
 
 

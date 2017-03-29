@@ -114,9 +114,20 @@ module.exports = {
 						fallbackLoader: 'style-loader',
 						loader: ['css-loader', 'sass-loader'],
 					}) :
-					['style-loader', 'css-loader', 'sass-loader']
-			},
-			{
+					['style-loader',
+					 'css-loader',{
+						loader: 'postcss-loader',
+							options: {
+								plugins: function () {
+									return [
+										require('autoprefixer')
+									];
+								}
+							}
+						},
+					 'sass-loader'
+					]
+			},{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: [
@@ -151,10 +162,10 @@ module.exports = {
 	plugins: plugins,
 	devServer: {
 		open: true,
-    historyApiFallback: true,
-    port: 3000,
-    hot: true,
-    stats: { colors: true },
-  }
+		historyApiFallback: true,
+		port: 3000,
+		hot: true,
+		stats: { colors: true },
+	}
 
 };
