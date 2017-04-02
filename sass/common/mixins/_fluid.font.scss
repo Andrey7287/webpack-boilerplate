@@ -1,0 +1,21 @@
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+
+  $b: $b + px;
+
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+
+@mixin fluidFontSize($f-min, $f-max, $w-min, $w-max) {
+
+  font-size: $f-min+px;
+
+  @media (min-width: #{$w-min}px) {
+    font-size: calcFluidFontSize($f-min, $f-max, $w-min, $w-max);
+  }
+  @media (min-width: #{$w-max}px) {
+    font-size: $f-max+px;
+  }
+
+}
