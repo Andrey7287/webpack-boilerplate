@@ -1,29 +1,27 @@
 const webpack = require('webpack'),
-			path = require('path'),
-			ExtractTextPlugin = require('extract-text-webpack-plugin'),
-			HtmlWebpackPlugin = require('html-webpack-plugin'),
-			SpritesmithPlugin = require('webpack-spritesmith');
-			nodeEnv = process.env.NODE_ENV || 'development',
-			isProd = nodeEnv === 'production',
-			pages = ['index', 'inner', 'contacts'];
+	path = require('path'),
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	HtmlWebpackPlugin = require('html-webpack-plugin'),
+	SpritesmithPlugin = require('webpack-spritesmith'),
+	nodeEnv = process.env.NODE_ENV || 'development',
+	isProd = nodeEnv === 'production',
+	outputPath = 'js/',
+	pages = ['index', 'inner', 'contacts'];
 
 const extractCSS = new ExtractTextPlugin({
 	filename: '../style.css',
-	disable: false,
+	disable: !isProd,
 	allChunks: true
 });
 
 const plugins = [
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'vendor',
-		minChunks: Infinity,
-		filename: 'vendor.bundle.js'
+	new webpack.ProvidePlugin({
+			$: 'jquery/dist/jquery.min'
 	}),
 	new webpack.DefinePlugin({
-		'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
-	}),
-	new webpack.ProvidePlugin({
-		$: 'jquery/dist/jquery.min'
+		'process.env': {
+			NODE_ENV: JSON.stringify(nodeEnv)
+		}
 	}),
 	new SpritesmithPlugin({
 		src: {
@@ -37,17 +35,27 @@ const plugins = [
 		apiOptions: {
 			cssImageRef: '../images/sprite.png'
 		}
-	})
+	}),
+	extractCSS
 ];
 
-pages.forEach((val)=>{
+pages.forEach((val) => {
 
 	plugins.push(
 		new HtmlWebpackPlugin({
 			template: `./frontend/${val}.ejs`,
 			title: `${val}`,
 			inject: true,
-			filename: isProd ? `../${val}.html` : `${val}.html`
+			filename: isProd ? `../${val}.html` : `${val}.html`,
+			chunksSortMode: function (a, b) {  //alphabetical order
+				if (a.names[0] > b.names[0]) {
+					return -1;
+				}
+				if (a.names[0] < b.names[0]) {
+					return 1;
+				}
+				return 0;
+			}
 		})
 	);
 
@@ -70,13 +78,13 @@ if (isProd) {
 				dead_code: true,
 				evaluate: true,
 				if_return: true,
-				join_vars: true,
+				join_vars: true
 			},
 			output: {
 				comments: false
 			},
-		}),
-		extractCSS
+			sourceMap: true
+		})
 	);
 } else {
 	plugins.push(
@@ -86,14 +94,15 @@ if (isProd) {
 }
 
 module.exports = {
-	devtool: isProd ? 'source-map' : 'cheap-module-source-map',
+	devtool: isProd ? 'cheap-module-source-map' : 'eval',
 	entry: {
-		js: ['./frontend/main']
+		bundle: ['./frontend/main']
 	},
 	output: {
-		path: isProd ? './js' : path.resolve(__dirname, '/js'),
-		filename: 'bundle.js',
-		publicPath: isProd ? './js/' : ''
+		path: path.resolve(__dirname, outputPath),
+		publicPath: isProd ? outputPath : '',
+		filename: '[name].js',
+		chunkFilename: 'chunk.[id].js'
 	},
 	module: {
 		noParse: /jquery/,
@@ -106,40 +115,39 @@ module.exports = {
 						name: '[name].[ext]'
 					}
 				}
-			},
-			{
+			}, {
 				test: /\.scss$/,
-				loaders: isProd ?
-					extractCSS.extract({
-						fallbackLoader: 'style-loader',
-						loader: ['css-loader', 'sass-loader'],
-					}) :
-					['style-loader',
-					 'css-loader',{
-						loader: 'postcss-loader',
-							options: {
-								plugins: function () {
-									return [
-										require('autoprefixer')
-									];
-								}
-							}
-						},
-					 'sass-loader'
-					]
-			},{
+				use: extractCSS.extract({
+					use: [{
+									loader: 'css-loader',
+									options: {
+										sourceMap: true
+									}
+                },{
+									loader: 'postcss-loader',
+									options: {
+										sourceMap: true
+									}
+								},{
+									loader: 'sass-loader',
+									options: {
+										sourceMap: true
+									}
+                }],
+								fallback: 'style-loader'
+				})
+      }, {
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'babel-loader',
-						query: {
-							cacheDirectory: true
-						}
-					}
-				]
-			},
-			{
+				loader: 'babel-loader',
+				options: {
+					cacheDirectory: true,
+					presets: [
+						[ 'es2015', { modules: false } ]
+					]
+				}
+
+			}, {
 				test: /\.(gif|png|jpg|jpeg\ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
 				use: [
 					{
@@ -163,9 +171,11 @@ module.exports = {
 	devServer: {
 		open: true,
 		historyApiFallback: true,
-		port: 3000,
+		port: 4000,
 		hot: true,
-		stats: { colors: true },
+		stats: {
+			colors: true
+		},
 	}
 
 };

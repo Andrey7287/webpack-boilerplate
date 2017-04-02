@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Roboto:400,500,700&amp;subset=cyrillic" rel="stylesheet" />
 	<link rel="shortcut icon" href="./favicon.ico">
-</head>
+<link href="js/../style.css" rel="stylesheet"></head>
 
 <body>
 	<div class="body">
@@ -22,17 +22,35 @@
 								<span>toggle menu</span>
 							</button>
 							<!-- Site menu data -->
-							<%
-							var menuItems = ['О&nbsp;нас','Каталог','Статьи','Отзывы','Контакты']
-							%>
+
 							<!-- Site menu template -->
 							<ul class="site-nav">
-							<%menuItems.forEach((item, idx)=>{%>
 
-								<li class="site-nav__item<% if(!idx){ %> site-nav__item--act<%}%>">
-									<a href=""><%=item %></a>
+
+								<li class="site-nav__item site-nav__item--act">
+									<a href="">О&nbsp;нас</a>
 								</li>
-							<%});%>
+
+
+								<li class="site-nav__item">
+									<a href="">Каталог</a>
+								</li>
+
+
+								<li class="site-nav__item">
+									<a href="">Статьи</a>
+								</li>
+
+
+								<li class="site-nav__item">
+									<a href="">Отзывы</a>
+								</li>
+
+
+								<li class="site-nav__item">
+									<a href="">Контакты</a>
+								</li>
+
 							</ul>
 						</nav>
 
@@ -80,6 +98,6 @@
 		</footer>
 		<button href="#" class="scrollup">Наверх</button>
 	</div>
-</body>
+<script type="text/javascript" src="js/bundle.js"></script></body>
 
 </html>

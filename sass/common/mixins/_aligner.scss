@@ -1,0 +1,20 @@
+@mixin aligner($switch: on) {
+	@if $switch == on {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		.aligner {
+			@include layout(table);
+			height: 100%;
+		}
+	}
+	@if $switch == off {
+		position: static;
+		.aligner {
+			@include layout(block);
+			height: auto;
+		}
+	}
+}

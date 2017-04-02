@@ -1,24 +1,25 @@
  /* Fonts */
-$open-sans: 'Open Sans', sans-serif;
+$open: 'Open Sans', sans-serif;
+$roboto-c: 'Roboto Condensed', sans-serif;
+$roboto: 'Roboto', sans-serif;
 
-$default-font: $open-sans;
-$base-font-size: 15;
-$base-line-height: 26;
-$default-color: #545454;
-$black: #333;
+$default-font: $open;
+$base-font-size: 16;
+$base-line-height: 30;
+$default-color: #333;
 
-$link: #01a3d4;
-$link-hov: #01a3d4;
-
-$header: #40484b;
+$header: #112854;
 
 /* Colors */
-$grey: #777;
-$soft-grey: #999;
-$bkg-grey: #e1e1e1;
-$bkg-footer: #e9f6fa;
-$bkg-header: #e9f6fa;
+$red: #bd0112;
+$grey: #555;
+$menu: #2c66d3;
+$bkg-footer: #4f699b;
+
+/* Links */
+$link: $red;
+$link-hov: $red;
 
 /* Components */
-$c-humburger-color: blue;
-$scroll-up-color: blue;
+$c-humburger-color: $menu;
+$scroll-up-color: $menu;

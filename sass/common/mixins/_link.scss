@@ -13,6 +13,6 @@
 		color: $hov;
 	}
 	&:viseted {
-		darken($color, 15%)
+		color: darken($color, 15%);
 	}
 }

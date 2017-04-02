@@ -2,7 +2,7 @@
 
 ## Contains
 
-- [x] [Webpack 2.2](https://webpack.js.org/)
+- [x] [Webpack 2.3](https://webpack.js.org/)
 - [x] [Babel 6.x](https://babeljs.io/)
 
 ## Features
@@ -11,8 +11,9 @@
 - [x] Code Splitting
 - [x] Hot Module Replacement
 - [x] ES-2015
-- [x] ejs templates 
-- [x] Building sprites
+- [x] ejs
+- [x] SCSS + postCSS
+- [x] Sprites compiling
 
 ## System Requirements
 
